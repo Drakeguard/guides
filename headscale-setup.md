@@ -447,66 +447,7 @@ A Headscale ACL rule evaluates:
 3. **Does an ACL rule allow that source-to-destination combination?**  
    If a matching `accept` rule exists, traffic is allowed. Otherwise, traffic is denied.
 
-```visualizer
-<svg width="100%" viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Headscale ACL flow showing user group and destination node tag matching an ACL rule">
-  <defs>
-    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-      <path d="M0,0 L8,4 L0,8 Z" fill="var(--color-text-secondary)"/>
-    </marker>
-  </defs>
-
-  <g class="c-blue">
-    <rect x="25" y="32" width="190" height="78" rx="8"/>
-    <text class="th" x="120" y="57" text-anchor="middle">Source node</text>
-    <text class="ts" x="120" y="80" text-anchor="middle">User: personal@</text>
-    <text class="ts" x="120" y="98" text-anchor="middle">Member of group:personal</text>
-  </g>
-
-  <g class="c-purple">
-    <rect x="25" y="178" width="190" height="88" rx="8"/>
-    <text class="th" x="120" y="204" text-anchor="middle">Destination node</text>
-    <text class="ts" x="120" y="227" text-anchor="middle">Node ID: 3</text>
-    <text class="ts" x="120" y="247" text-anchor="middle">Assigned tag: tag:server</text>
-  </g>
-
-  <path d="M215 71 L300 71 L300 145 L350 145" fill="none" class="arr" marker-end="url(#arrow)"/>
-  <path d="M215 222 L300 222 L300 175 L350 175" fill="none" class="arr" marker-end="url(#arrow)"/>
-
-  <g class="c-teal">
-    <rect x="350" y="105" width="250" height="110" rx="8"/>
-    <text class="th" x="475" y="132" text-anchor="middle">ACL policy</text>
-    <text class="ts" x="475" y="157" text-anchor="middle">src: group:personal</text>
-    <text class="ts" x="475" y="176" text-anchor="middle">dst: tag:server:22,80,443</text>
-    <text class="ts" x="475" y="195" text-anchor="middle">action: accept</text>
-  </g>
-
-  <path d="M475 215 L475 278" fill="none" class="arr" marker-end="url(#arrow)"/>
-
-  <g class="c-amber">
-    <rect x="350" y="278" width="250" height="70" rx="8"/>
-    <text class="th" x="475" y="303" text-anchor="middle">Port check</text>
-    <text class="ts" x="475" y="326" text-anchor="middle">Example: connecting to port 443</text>
-  </g>
-
-  <path d="M475 348 L475 394" fill="none" class="arr" marker-end="url(#arrow)"/>
-
-  <g class="c-teal">
-    <rect x="350" y="394" width="250" height="48" rx="8"/>
-    <text class="th" x="475" y="418" text-anchor="middle">Allowed</text>
-  </g>
-
-  <g class="c-gray">
-    <rect x="25" y="330" width="240" height="78" rx="8"/>
-    <text class="th" x="145" y="355" text-anchor="middle">No matching rule?</text>
-    <text class="ts" x="145" y="378" text-anchor="middle">The connection is denied</text>
-    <text class="ts" x="145" y="396" text-anchor="middle">by default</text>
-  </g>
-
-  <path d="M350 330 L265 370" fill="none" class="arr" marker-end="url(#arrow)"/>
-
-  <text class="ts" x="25" y="455">Tags identify destination nodes; groups identify source users.</text>
-</svg>
-```
+![](/assets/headscale-setup_1.svg)
 
 For example, this policy rule:
 
