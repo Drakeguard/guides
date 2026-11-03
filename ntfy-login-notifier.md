@@ -22,8 +22,12 @@ if ! command -v curl >/dev/null 2>&1; then
 fi
 
 # ----- SERVER INFO -----
-SERVER_IP="$(hostname -I 2>/dev/null | awk 'NF{print $1; exit}')"
+SERVER_IP="${SSH_CONNECTION#* * }"
+SERVER_IP="${SERVER_IP%% *}"
 [ -z "$SERVER_IP" ] && SERVER_IP="unknown"
+
+SERVER_NAME="$(cat /etc/hostname 2>/dev/null || echo unknown)"
+
 
 # ----- LOGIN INFO (from PAM if available) -----
 USER_NAME="${PAM_USER:-$(id -un 2>/dev/null)}"
@@ -43,7 +47,7 @@ MESSAGE="User ${USER_NAME} logged in from ${RHOST} via ${SERVICE} on ${TTY} (ser
         --max-time 3 \
         --connect-timeout 2 \
         -H "Authorization: Bearer ${NTFY_TOKEN}" \
-        -H "Title: Login on $(hostname) (${SERVER_IP})" \
+        -H "Title: Login on ${SERVER_NAME} (${SERVER_IP})" \
         -H "Priority: high" \
         -H "Tags: login,server" \
         -d "${MESSAGE}" \
